@@ -1,0 +1,40 @@
+.form {
+    border: 1px solid #333333;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.request,
+.response__value {
+    border-radius: 40px;
+    padding: 10px;
+    margin: 10px 0;
+    width: min-content;
+}
+
+.output {
+    max-height: 620px;
+    overflow-y: auto;
+}
+
+.output div:first-child {
+    margin-top: 0;
+}
+
+.request {
+    background: #fc0;
+    border-top-left-radius: 0;
+    color: #000000;
+}
+
+.response {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.response__value {
+    background: #6524ff;
+    border-top-right-radius: 0;
+    color: #ffffff;
+}
