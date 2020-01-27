@@ -49,11 +49,3 @@ export const aliceTesting = (chat: Chat, port?: number) => {
 
     app.listen(PORT, console.log.bind(null, `Server started on ${PORT} port. http://localhost:${PORT}/`));
 };
-
-aliceTesting((_, text) => {
-    if (!text) {
-        return 'Привет!';
-    }
-
-    return text.split('').reverse().join('');
-});
