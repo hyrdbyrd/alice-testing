@@ -58,9 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     top: output.scrollHeight
                 });
             })
-            .catch(() => {
-
-            });
+            .catch(console.error);
     }
 
     form.addEventListener('submit', event => {
