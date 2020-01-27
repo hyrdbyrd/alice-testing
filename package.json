@@ -14,12 +14,19 @@
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "eslint": "^6.8.0",
-    "fs-extra": "^8.1.0"
+    "fs-extra": "^8.1.0",
+    "husky": "^4.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"...\"",
     "dev": "nodemon --watch './src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "build": "tsc -p ./tsconfig.json && node ./scripts/copy-static.js"
+    "build": "tsc -p ./tsconfig.json && node ./scripts/copy-static.js",
+    "lint": "eslint --fix ./**/*.ts"
   },
   "keywords": [],
   "author": "",
