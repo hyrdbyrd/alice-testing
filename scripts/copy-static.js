@@ -11,5 +11,8 @@
             .copy(join(sourcePath, folder), join(buildPath, folder))
             .then(console.log.bind(null, `${folder} have been copied`))
             .catch(console.error.bind(null, `${folder} haven't been copied`))
+
+        // empty line
+        console.log();
     }
 })();
