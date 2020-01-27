@@ -6,7 +6,7 @@ export class DataBase<T> {
         private db: Record<string, T> = {}
     ) {}
 
-    private refreshTimeoutLoop(key) {
+    private refreshTimeoutLoop(key: string) {
         if (this.debounceTimer[key]) {
             clearTimeout(this.debounceTimer[key]);
             this.debounceTimer[key] = undefined;
@@ -16,12 +16,12 @@ export class DataBase<T> {
             this.debounceTimer[key] = setTimeout(() => delete this.db[key], this.clearTimeout) as unknown as number;
     }
 
-    public add(key, value) {
+    public add(key: string, value: T) {
         this.refreshTimeoutLoop(key);
         this.db[key] = value;
     }
 
-    public get(key) {
+    public get(key: string) {
         if (this.db[key])
             this.refreshTimeoutLoop(key);
 
