@@ -11,8 +11,21 @@ window.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.form');
     const output = document.querySelector('.output');
     const input = document.querySelector('.input');
+    const submit = document.querySelector('.submit');
 
-    function doRequest(value) {
+    function doRequest(value, ignoreEmptyValue = false) {
+        if (!ignoreEmptyValue && !value) {
+            return;
+        }
+
+        if (value) {
+            const reqElem = requestElem.cloneNode(true);
+            reqElem.innerText = value;
+            input.value = '';
+
+            output.appendChild(reqElem);
+        }
+
         output.classList.add('loading');
 
         fetch('/rest', {
@@ -24,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 version: '1',
                 session: '1',
                 request: {
-                    command: value.toLowerCase().replace(/[^A-Za-zА-Яа-яёЁ]/ig, ''),
+                    command: value.toLowerCase().replace(/[^A-Za-zА-Яа-яёЁ !.,]/ig, ''),
                     original_utterance: value
                 }
             })
@@ -54,13 +67,12 @@ window.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         const value = input.value;
-
-        const reqElem = requestElem.cloneNode(true);
-        reqElem.innerText = value;
-        input.value = '';
-
-        output.appendChild(reqElem);
-
         doRequest(value);
+    });
+
+    submit.addEventListener('click', () => {
+        doRequest('', true);
+        input.removeAttribute('disabled');
+        form.querySelector('.controls').removeChild(submit);
     });
 });

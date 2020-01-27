@@ -27,11 +27,18 @@ export const aliceTesting = (chat: Chat, port?: number) => {
             if (!db.get(session))
                 db.add(session, { state: 'initial', meta: {} });
 
+            let text;
+            try {
+                text = chat(db.get(session), request.command, request.original_utterance)
+            } catch (e) {
+                text = e.toString();
+            }
+
             res.send({
                 version,
                 session,
                 response: {
-                    text: chat(db.get(session), request.command, request.original_utterance),
+                    text,
                     end_session: false
                 }
             });
@@ -44,5 +51,9 @@ export const aliceTesting = (chat: Chat, port?: number) => {
 };
 
 aliceTesting((_, text) => {
-    return text;
+    if (!text) {
+        return 'Привет!';
+    }
+
+    return text.split('').reverse().join('');
 });
