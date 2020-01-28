@@ -90,4 +90,4 @@ export interface State {
     meta: any;
 }
 
-export type Chat = (state: State, message: string, originalMessage: string) => string;
+export type Chat<T> = (state: T, message: string, originalMessage: string) => string;
