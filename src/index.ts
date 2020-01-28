@@ -42,4 +42,6 @@ export const aliceTesting = (chat: Chat, port?: number) => {
         .use('*', (req, res) => res.render('error'));
 
     app.listen(PORT, console.log.bind(null, `Server started on ${PORT} port. http://localhost:${PORT}/`));
+
+    return app;
 };
